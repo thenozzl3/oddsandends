@@ -1,0 +1,7 @@
+[package]
+name = "lcdriver"
+version = "0.1.0"
+authors = ["thenozzle"]
+
+[dependencies]
+serial = "0.3"
