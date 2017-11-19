@@ -1,10 +1,10 @@
 [package]
-name = "lcdriver"
+name = "mio-lcd"
 version = "0.1.0"
 authors = ["thenozzle"]
 
 [dependencies]
-futures = "0.1"
-tokio-serial = "0.1.0"
-tokio-core = "0.1"
+mio-serial = "0.5"
+mio = "0.6"
+serialport = "*"
 bytes = "0.4.3"

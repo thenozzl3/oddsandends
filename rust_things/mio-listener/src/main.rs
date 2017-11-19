@@ -80,31 +80,28 @@ impl Handler for WebSocketServer{
         println!("incoming data ..");
         let mut recv_buf = ByteBuf::mut_with_capacity(2048);
 
-          {
-            let client = self.clients.get_mut(&token).unwrap();
+        {
+           let client = self.clients.get_mut(&token).unwrap();
 
-            loop {
-                match client.try_read_buf(&mut recv_buf){
-
-
-                Ok(Some(n)) => {
-
+           loop {
+             match client.try_read_buf(&mut recv_buf){
+               Ok(Some(n)) => {
                   println!("we got {} bytes .. ", n);
                   println!("from client : {}", client.peer_addr().unwrap());
-
                   if n < 2048 {
                     break;
                   }
-                },
-                Ok(None) => {
-                  break;
-                },
-                Err(_) => {
-                  break;
-                }
+               },
+               Ok(None) => {
+                 break;
+               },
+               Err(_) => {
+                 break;
+               }
             }
           };
         }
+
         self.send_resp(&recv_buf, &token);
 
         let mut client = self.clients.get_mut(&token).unwrap();
@@ -112,7 +109,6 @@ impl Handler for WebSocketServer{
         let mut interest = EventSet::hup();
         interest.insert(EventSet::readable());
         interest.insert(EventSet::error());
-
 
         event_loop.reregister(client ,
         token,
