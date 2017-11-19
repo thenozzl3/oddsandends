@@ -1,21 +1,117 @@
-
-extern crate futures;
-extern crate tokio_serial;
-extern crate tokio_core;
+//! Simple example that echos recevied serial traffic to stdout
+extern crate mio;
 extern crate bytes;
+extern crate mio_serial;
 
+
+use mio::{Poll, PollOpt, Events, Token, Ready};
+use mio::unix::UnixReady;
+use mio_serial::SerialPort;
+use std::io::Read;
+use bytes::BytesMut;
+use std::sync::mpsc::{Sender, Receiver};
+use std::sync::mpsc;
 use std::{io, env, str};
 use std::time::Duration;
 use std::fmt;
 use std::thread;
 use std::env::args;
 
-use tokio_core::io::{Io, Codec, EasyBuf};
-use tokio_core::reactor::Core;
-use futures::{future, Future, Stream, Sink};
-use tokio_serial::{BaudRate,DataBits,FlowControl,StopBits,Parity,SerialPort};
-use bytes::BytesMut;
 
+const SERIAL_TOKEN: Token = Token(0);
+
+pub fn main() {
+
+  let (thread_tx, thread_rx) = mpsc::channel();
+  let mut args = env::args();
+  let tty_path = args.nth(1).unwrap_or_else(|| "/dev/tty.usbserial-00003".into());
+
+  let poll = Poll::new().unwrap();
+  let mut events = Events::with_capacity(1024);
+
+  // Create the listener
+  let mut settings = mio_serial::SerialPortSettings::default();
+  settings.baud_rate = mio_serial::BaudRate::Baud115200;
+
+  let mut rx = mio_serial::Serial::from_path(&tty_path, &settings).unwrap();
+
+  // Disable exclusive mode
+  rx.set_exclusive(false)
+    .expect("Unable to set serial port into non-exclusive mode.");
+
+  let mut wx = mio_serial::Serial::from_path(&tty_path, &settings).unwrap();
+  // Disable exclusive mode
+  wx.set_exclusive(false)
+    .expect("Unable to set serial port into non-exclusive mode.");
+
+  poll.register(&rx,
+    SERIAL_TOKEN,
+    Ready::readable() |
+    UnixReady::hup() |
+    UnixReady::error(),
+    PollOpt::edge()).unwrap();
+
+  let mut rx_buf = [0u8; 128];
+
+  thread::spawn(move || {
+    'outer: loop {
+      poll.poll(&mut events, None).unwrap();
+
+      if events.is_empty() {
+        println!("Read timed out!");
+        continue;
+      }
+
+      for event in events.iter() {
+        let mut return_code :i32 = 0;
+        match event.token() {
+          SERIAL_TOKEN => {
+            let ready = event.readiness();
+
+            if ready.contains(UnixReady::hup() | UnixReady::error()) {
+              println!("Quitting due to event: {:?}", ready);
+              break 'outer;
+            }
+
+            if ready.is_readable() {
+              match rx.read(&mut rx_buf) {
+                Ok(b) => {
+                  match b {
+                    b if b > 0 => {
+                      for elem in rx_buf[..b].iter() {
+                        print!("{:x}", elem);
+                      }
+                      println!("");
+                      //transmit stuff here to the writing loop...
+                      match rx_buf[0] >> 4 {
+                        // ack from host
+                        4 => return_code = 4,
+                        // key activity
+                        8 => return_code = 8,
+                        //ppbly an error
+                        _ => return_code = 0,
+                      }
+                      thread_tx.send(return_code).unwrap();
+                    }
+                    _ => println!("Read would have blocked."),
+                  }
+                }
+                Err(e) => println!("Error:  {}", e),
+              }
+            }
+          }
+          t => unreachable!("Unexpected token: {:?}", t),
+        }
+      }
+    }
+  });
+
+  loop {
+    let mut packet_state :i32;
+    packet_state = thread_rx.recv().unwrap();
+    println!("{}", packet_state);
+  }
+}
 
 struct CommandPacket {
   data: Vec<u8>
@@ -104,79 +200,9 @@ impl CommandPacket {
   }
 }
 
-fn main() {
-  let tty_path = env::args_os().nth(1).unwrap();
-  let mut core = Core::new().unwrap();
-  let handle = core.handle();
-  let settings = tokio_serial::SerialPortSettings::default();
-  let mut port = tokio_serial::Serial::from_path(&tty_path, &settings, &handle).unwrap();
-  port.set_baud_rate(BaudRate::Baud115200);
-  port.set_data_bits(DataBits::Eight);
-  port.set_parity(Parity::None);
-  port.set_stop_bits(StopBits::One);
-  port.set_flow_control(FlowControl::None);
-
-
-    let mut some_packet = CommandPacket::new(0x06);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x1F);
-    let mut poop_data = [0,0,80,128,128,80];
-    some_packet.add_data(&poop_data);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x04);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x09);
-    let mut poop_data = [0,0,0,12,3,45,23,44,12];
-    some_packet.add_data(&poop_data);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x1F);
-    let mut poop_data = [0,0,0];
-    some_packet.add_data(&poop_data);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x09);
-    let mut poop_data = [0,0,0,12,45,45,45,45,12];
-    some_packet.add_data(&poop_data);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x1F);
-    let mut poop_data = [0,1,0];
-    some_packet.add_data(&poop_data);
-    some_packet.assemble();
-    some_packet.output();
-
-    some_packet.reset();
-    some_packet.set_command(0x1F);
-    let mut poop_data = [1,2,31,31,31,31];
-    some_packet.add_data(&poop_data);
-    some_packet.assemble();
-    some_packet.output();
-}
-
 fn interact<T: SerialPort>(port: &mut T, some_packet: &CommandPacket) -> io::Result<()> {
-  thread::sleep_ms(400);
-
   try!(port.set_timeout(Duration::from_millis(1000)));
   try!(port.write(some_packet.data.as_slice()));
 
   Ok(())
 }
-
-
-
