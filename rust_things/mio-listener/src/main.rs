@@ -1,17 +1,12 @@
-extern crate mio;
-extern crate bytes;
-extern crate getopts;
-extern crate env_logger;
-
 use getopts::Options;
 use std::env;
 use std::str;
 #[macro_use] extern crate log;
+//#[macro_use] log;
 use mio::*;
 use mio::tcp::*;
-use bytes::{Buf, ByteBuf, MutByteBuf};
+use bytes::{ByteBuf, MutByteBuf};
 use std::io;
-use std::thread;
 use std::io::Write;
 use std::net::SocketAddr;
 use std::str::FromStr;
@@ -63,7 +58,6 @@ impl Handler for WebSocketServer{
         };
         self.token_counter += 1;
         let new_token = Token(self.token_counter);
-        //self.clients.insert(new_token, WebSocketClient::new(client_socket));
         self.clients.insert(new_token, client_socket);
 
 
@@ -71,49 +65,44 @@ impl Handler for WebSocketServer{
         interest.insert(EventSet::readable());
 
 
-        event_loop.register(&self.clients[&new_token],
+        event_loop.register(
+          &self.clients[&new_token],
           new_token,
           interest,
           PollOpt::edge()|PollOpt::oneshot()).unwrap();
       },
       token => {
         println!("incoming data ..");
+
         let mut recv_buf = ByteBuf::mut_with_capacity(2048);
 
-        {
-           let client = self.clients.get_mut(&token).unwrap();
+        let client = self.clients.get_mut(&token).unwrap();
+ 
+        while let Ok(Some(n)) = client.try_read_buf(&mut recv_buf){
+          println!("we got {} bytes .. ", n);
 
-           loop {
-             match client.try_read_buf(&mut recv_buf){
-               Ok(Some(n)) => {
-                  println!("we got {} bytes .. ", n);
-                  println!("from client : {}", client.peer_addr().unwrap());
-                  if n < 2048 {
-                    break;
-                  }
-               },
-               Ok(None) => {
-                 break;
-               },
-               Err(_) => {
-                 break;
-               }
-            }
-          };
-        }
+          println!("from client : {}", client.peer_addr().unwrap());
+          if n < 2048 {
+            break;
+          }
+        };
 
         self.send_resp(&recv_buf, &token);
 
-        let mut client = self.clients.get_mut(&token).unwrap();
+        // new mutable borrow to self .. note to self (heheh)
+        // this is ok with non-lexical lifetimes - compiler will
+        // automatically drop client on a rebind.
+        let client = self.clients.get_mut(&token).unwrap();
 
         let mut interest = EventSet::hup();
         interest.insert(EventSet::readable());
         interest.insert(EventSet::error());
 
-        event_loop.reregister(client ,
-        token,
-        interest,
-        PollOpt::edge()|PollOpt::oneshot()).unwrap();
+        event_loop.reregister(
+          client,
+          token,
+          interest,
+          PollOpt::edge()|PollOpt::oneshot()).unwrap();
       }
     }
   }
@@ -133,16 +122,23 @@ impl WebSocketServer {
 
 
     let client = self.clients.get_mut(&token).unwrap().peer_addr().unwrap();
-    for (loc_token, socket) in self.clients.iter_mut(){
+    for (loc_token, tcpstream) in self.clients.iter_mut(){
       if loc_token.ne(token) {
           let client_addr = format!("{} : ",client);
 
-          let full_string: &str = &(client_addr + &match str::from_utf8(buf.bytes()) {
-            Ok(m) => {m}
+          let full_string: &str = &(client_addr +
+            &match str::from_utf8(buf.bytes()) {
+              Ok(m) => {m}
+              //Err(f) => {panic!(f.to_string())}
+              Err(_) => {"huh ? \n"}
+             }
+          );
+
+          match tcpstream.write(full_string.as_bytes()){
+            Ok(_) => {()}
             //Err(f) => {panic!(f.to_string())}
-            Err(_) => {"huh ? \n"}
-          });
-          socket.write(full_string.as_bytes());
+            Err(_) => {println!("error writing stream .. ");}
+          };
       }
     }
   }
