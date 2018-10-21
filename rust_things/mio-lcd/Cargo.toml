@@ -2,9 +2,12 @@
 name = "mio-lcd"
 version = "0.1.0"
 authors = ["thenozzle"]
+edition = "2018"
 
 [dependencies]
 mio-serial = "0.5"
 mio = "0.6"
 serialport = "*"
 bytes = "0.4.3"
+crossbeam = "*"
+crossbeam-utils = "*"
