@@ -1,4 +1,3 @@
-mod packet;
 
 use mio::{Poll, PollOpt, Events, Token, Ready};
 use mio::unix::UnixReady;
@@ -6,6 +5,7 @@ use std::io::Read;
 use std::sync::mpsc;
 use std::env;
 use crossbeam_utils::thread;
+use mio_lcd::packet;
 
 const SERIAL_TOKEN: Token = Token(0);
 
