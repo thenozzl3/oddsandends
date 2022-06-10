@@ -1,0 +1,58 @@
+extern crate regex;
+use std::fs::File;
+use std::io::BufRead;
+use std::io::BufReader;
+use std::str::FromStr;
+use regex::Regex;
+
+
+fn main() {
+  /*
+   *
+    It contains at least three vowels (aeiou only), like aei, xazegov, or aeiouaeiouaeiou.
+    It contains at least one letter that appears twice in a row, like xx, abcdde (dd), or aabbccdd (aa, bb, cc, or dd).
+    It does not contain the strings ab, cd, pq, or xy, even if they are part of one of the other requirements.
+*/
+  let mut naughty_regex = Regex::new(r"(ab|cd|pq|xy)").unwrap();
+  let mut vowel_regex = Regex::new(r"(a|e|i|o|u)+").unwrap();
+  let mut happy_words = 0;
+  let mut happy_points = 0;
+  let mut vowel_count = 0;
+
+  match File::open("input5") {
+    Ok(file) => {
+      let bufFile = BufReader::new(&file);
+      for line in bufFile.lines(){
+        let current_line = &(line.unwrap());
+        println!("{}", &current_line);
+        if naughty_regex.is_match(current_line){
+          continue;
+        }
+        let mut next_char:char = '^';
+
+        for character in current_line.bytes() {
+          if character as char == next_char {
+            println!("double found ..");
+            for caps in vowel_regex.captures_iter(&current_line){
+               vowel_count += 1;
+               println! ("vowel found {}", caps.get(1).unwrap().as_str());
+            }
+            continue;
+          }
+
+          next_char = character as char;
+
+        }
+
+
+        if happy_points >= 2 {
+          happy_points = 0;
+          happy_words += 1;
+        }
+        println!("")
+      }
+    },
+    Err(_) => { print!("brokezies")}
+  }
+  println!("happy words {}", happy_words);
+}
