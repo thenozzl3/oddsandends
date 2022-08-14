@@ -1,4 +1,5 @@
 
+use clap::Parser;
 use mio::{Poll, PollOpt, Events, Token, Ready};
 use mio::unix::UnixReady;
 use std::io::Read;
@@ -9,11 +10,18 @@ use mio_lcd::packet;
 
 const SERIAL_TOKEN: Token = Token(0);
 
+#[derive(Parser,Debug)]
+struct Args {
+  #[clap(short, long, value_parser, default_value = "/dev/tty.usbserial-00003")]
+  arg_device: String
+}
+
 pub fn main() {
 
   let (thread_tx, thread_rx) = mpsc::channel::<Vec<u8>>();
-  let mut args = env::args();
-  let tty_path = args.nth(1).unwrap_or_else(|| "/dev/tty.usbserial-00003".into());
+  let mut args = Args::parse();
+
+  let tty_path = args.arg_device;
 
   let poll = Poll::new().unwrap();
   let mut events = Events::with_capacity(1024);

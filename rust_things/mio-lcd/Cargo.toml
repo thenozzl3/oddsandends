@@ -11,3 +11,4 @@ serialport = "*"
 bytes = "0.4.3"
 crossbeam = "*"
 crossbeam-utils = "*"
+clap = { version = "3.2.8", features = ["derive"] }
