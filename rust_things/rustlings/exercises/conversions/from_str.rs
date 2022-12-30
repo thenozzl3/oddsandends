@@ -35,7 +35,6 @@ enum ParsePersonError {
 //    with something like `"4".parse::<usize>()`
 // 6. If while extracting the name and the age something goes wrong, an error should be returned
 // If everything goes well, then return a Result of a Person object
-
 impl FromStr for Person {
   type Err = ParsePersonError;
   fn from_str(s: &str) -> Result<Person, Self::Err> {
