@@ -52,6 +52,7 @@ pub fn main() {
 
   let mut some_packet = packet::CommandPacket::new(0x06);
 
+  
   // receiving thread ..
   //match thread::scope(|scope| {
   thread::scope(|scope| {
