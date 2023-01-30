@@ -1,0 +1,13 @@
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/deps/toml-c29d7930b37587c3.rmeta: /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/lib.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/map.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/value.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/datetime.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/ser.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/de.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/tokens.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/macros.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/spanned.rs
+
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/deps/toml-c29d7930b37587c3.d: /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/lib.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/map.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/value.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/datetime.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/ser.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/de.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/tokens.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/macros.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/spanned.rs
+
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/lib.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/map.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/value.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/datetime.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/ser.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/de.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/tokens.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/macros.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/toml-0.5.9/src/spanned.rs:

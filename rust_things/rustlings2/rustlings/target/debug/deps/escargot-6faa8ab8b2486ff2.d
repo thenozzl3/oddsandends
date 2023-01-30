@@ -1,0 +1,15 @@
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/deps/escargot-6faa8ab8b2486ff2.rmeta: /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/lib.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/build.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/cargo.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/msg.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/run.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/error.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/format/mod.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/format/diagnostic.rs /Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/build/escargot-d0ec72ce46690599/out/current_target.txt
+
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/deps/escargot-6faa8ab8b2486ff2.d: /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/lib.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/build.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/cargo.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/msg.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/run.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/error.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/format/mod.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/format/diagnostic.rs /Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/build/escargot-d0ec72ce46690599/out/current_target.txt
+
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/lib.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/build.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/cargo.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/msg.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/run.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/error.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/format/mod.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/escargot-0.4.0/src/format/diagnostic.rs:
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/build/escargot-d0ec72ce46690599/out/current_target.txt:
+
+# env-dep:OUT_DIR=/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/build/escargot-d0ec72ce46690599/out

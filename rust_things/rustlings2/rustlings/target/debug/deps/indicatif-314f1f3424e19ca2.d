@@ -1,0 +1,11 @@
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/deps/indicatif-314f1f3424e19ca2.rmeta: /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/lib.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/format.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/iter.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/progress_bar.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/state.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/style.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/utils.rs
+
+/Users/thenozzle/src/oddsandends/rust_things/rustlings2/rustlings/target/debug/deps/indicatif-314f1f3424e19ca2.d: /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/lib.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/format.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/iter.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/progress_bar.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/state.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/style.rs /Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/utils.rs
+
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/lib.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/format.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/iter.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/progress_bar.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/state.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/style.rs:
+/Users/thenozzle/.cargo/registry/src/github.com-1ecc6299db9ec823/indicatif-0.16.2/src/utils.rs:
