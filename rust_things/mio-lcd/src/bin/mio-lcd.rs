@@ -17,7 +17,6 @@ struct Args {
 }
 
 pub fn main() {
-
   let (thread_tx, thread_rx) = mpsc::channel::<Vec<u8>>();
   let mut args = Args::parse();
 
@@ -52,9 +51,8 @@ pub fn main() {
 
   let mut some_packet = packet::CommandPacket::new(0x06);
 
-  
+
   // receiving thread ..
-  //match thread::scope(|scope| {
   thread::scope(|scope| {
     scope.spawn(move |_| {
       loop {

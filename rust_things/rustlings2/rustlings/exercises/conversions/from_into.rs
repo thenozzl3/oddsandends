@@ -40,8 +40,7 @@ impl From<&str> for Person {
     fn from(s: &str) -> Person {
       if s.len() == 0 {return Person::default()}
       let mut split = s.split(',').collect::<Vec<&str>>();
-      let mut string_iter = split.iter();
-      if string_iter.count() != 2 {return Person::default();}
+      if split.len() != 2 {return Person::default();}
 
       let mut new_person = Person::default();
       let mut string_iter = split.iter();

@@ -9,7 +9,6 @@
 // implementing this trait.
 // Execute `rustlings hint traits1` or use the `hint` watch subcommand for a hint.
 
-
 trait AppendBar {
     fn append_bar(self) -> Self;
 }

@@ -6,13 +6,9 @@
 
 
 pub fn foo_if_fizz(fizzish: &str) -> &str {
-    if fizzish == "fizz" {
-        return "foo";
-    } else {
-      if fizzish == "fuzz" { return "bar";}
-    }
-
-    return "baz";
+    if fizzish == "fizz" {return "foo";}
+    if fizzish == "fuzz" {return "bar";}
+    "baz"
 }
 
 
